@@ -45,6 +45,7 @@
 #define RTM_DELLINK (RTM_BASE + 1)
 #define RTM_SETLINK (RTM_BASE + 3)
 
+#if 0
 #define NLMSG_ALIGNTO 4
 #define NLMSG_ALIGN(len) (((len) + NLMSG_ALIGNTO - 1) & ~(NLMSG_ALIGNTO - 1))
 #define NLMSG_HDRLEN ((int) NLMSG_ALIGN(sizeof(struct nlmsghdr)))
@@ -58,6 +59,7 @@
 			   (nlh)->nlmsg_len >= sizeof(struct nlmsghdr) && \
 			   (int) (nlh)->nlmsg_len <= (len))
 #define NLMSG_PAYLOAD(nlh,len) ((nlh)->nlmsg_len - NLMSG_SPACE((len)))
+#endif
 
 #define RTA_ALIGNTO 4
 #define RTA_ALIGN(len) (((len) + RTA_ALIGNTO - 1) & ~(RTA_ALIGNTO - 1))
@@ -71,7 +73,7 @@
 #define RTA_DATA(rta) ((void *) (((char *) (rta)) + RTA_LENGTH(0)))
 #define RTA_PAYLOAD(rta) ((int) ((rta)->rta_len) - RTA_LENGTH(0))
 
-
+#if 0
 struct sockaddr_nl
 {
 	sa_family_t nl_family;
@@ -88,6 +90,7 @@ struct nlmsghdr
 	u32 nlmsg_seq;
 	u32 nlmsg_pid;
 };
+#endif
 
 struct ifinfomsg
 {
@@ -104,5 +107,7 @@ struct rtattr
 	unsigned short rta_len;
 	unsigned short rta_type;
 };
+
+#include <linux/netlink.h>
 
 #endif /* PRIV_NETLINK_H */
